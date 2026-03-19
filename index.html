@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PAC-MAN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Start Screen Overlay -->
+  <div id="start-screen" class="overlay">
+    <h2>PAC-MAN</h2>
+    <p>COLLECT ALL DOTS<br>AVOID THE GHOSTS<br>EAT POWER PELLETS TO FIGHT BACK</p>
+    <p>
+      ARROW KEYS / WASD TO MOVE<br>
+      DOTS = 10 PTS &nbsp; PELLETS = 50 PTS<br>
+      GHOSTS = 200 / 400 / 800 / 1600 PTS
+    </p>
+    <button class="btn" id="start-btn">START GAME</button>
+  </div>
+
+  <!-- Game Over Screen Overlay -->
+  <div id="game-over-screen" class="overlay hidden">
+    <h2>GAME OVER</h2>
+    <p>FINAL SCORE</p>
+    <p class="final-score" id="final-score-display">0</p>
+    <button class="btn" id="restart-btn-over">PLAY AGAIN</button>
+  </div>
+
+  <!-- Win Screen Overlay -->
+  <div id="win-screen" class="overlay hidden">
+    <h2>YOU WIN!</h2>
+    <p>CONGRATULATIONS!</p>
+    <p class="final-score" id="win-score-display">0</p>
+    <button class="btn" id="restart-btn-win">PLAY AGAIN</button>
+  </div>
+
+  <!-- Main Game Container -->
+  <div id="game-container">
+    <h1>PAC-MAN</h1>
+
+    <!-- HUD: Score and Lives -->
+    <div id="hud">
+      <div id="score-display">
+        <span id="score-label">SCORE</span>
+        <span id="score">0</span>
+        <span id="high-score-label">BEST</span>
+        <span id="high-score">0</span>
+      </div>
+      <div id="level-display">LEVEL <span id="level-num">1</span></div>
+      <div id="lives-display">
+        <span id="lives-label">LIVES</span>
+        <div id="lives-icons"></div>
+      </div>
+    </div>
+
+    <!-- Game Canvas -->
+    <canvas id="game-canvas"></canvas>
+
+    <!-- Controls hint -->
+    <div id="instructions">
+      ARROW KEYS / WASD TO MOVE &nbsp;|&nbsp; P TO PAUSE
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
