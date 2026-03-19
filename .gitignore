@@ -1,0 +1,11 @@
+
+# Swarmbuild runtime files — do not commit
+.deploy_key
+claude_mcp.json
+gemini_mcp.json
+codex_mcp.json
+*_mcp.json
+AGENT_PROMPT.md
+TASK_LIST.md
+SYSTEM_PROMPT.md
+MESSAGES.md
