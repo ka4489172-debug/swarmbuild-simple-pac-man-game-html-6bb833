@@ -1,0 +1,266 @@
+/* Pac-Man Game Styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+#game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 600px;
+  padding: 10px;
+}
+
+h1 {
+  color: #FFD700;
+  font-size: 1.8rem;
+  text-shadow: 0 0 10px #FFD700, 0 0 20px #FFA500;
+  letter-spacing: 4px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+/* HUD - Score and Lives */
+#hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 5px 10px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid #00f;
+  border-radius: 4px;
+}
+
+#score-display {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#score-label,
+#high-score-label {
+  color: #fff;
+  font-size: 0.55rem;
+  letter-spacing: 1px;
+}
+
+#score,
+#high-score {
+  color: #FFD700;
+  font-size: 0.8rem;
+  font-weight: bold;
+  min-width: 80px;
+}
+
+#lives-display {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+#lives-label {
+  color: #fff;
+  font-size: 0.55rem;
+  letter-spacing: 1px;
+}
+
+#lives-icons {
+  display: flex;
+  gap: 5px;
+}
+
+.life-icon {
+  width: 16px;
+  height: 16px;
+  background: #FFD700;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  clip-path: polygon(15% 50%, 85% 10%, 100% 50%, 85% 90%, 15% 50%);
+}
+
+/* Canvas */
+#game-canvas {
+  display: block;
+  border: 3px solid #00f;
+  border-radius: 2px;
+  box-shadow: 0 0 20px rgba(0, 0, 255, 0.5), inset 0 0 20px rgba(0, 0, 50, 0.3);
+  background: #000;
+  max-width: 100%;
+  image-rendering: pixelated;
+}
+
+/* Overlay Screens */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  gap: 20px;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.overlay h2 {
+  font-size: 1.8rem;
+  text-align: center;
+  animation: pulse 1s infinite alternate;
+}
+
+#start-screen h2 {
+  color: #FFD700;
+  text-shadow: 0 0 10px #FFD700;
+}
+
+#game-over-screen h2 {
+  color: #f00;
+  text-shadow: 0 0 10px #f00;
+}
+
+#win-screen h2 {
+  color: #0f0;
+  text-shadow: 0 0 10px #0f0;
+}
+
+.overlay p {
+  color: #fff;
+  font-size: 0.65rem;
+  text-align: center;
+  line-height: 2;
+  letter-spacing: 1px;
+}
+
+.overlay .final-score {
+  color: #FFD700;
+  font-size: 0.9rem;
+}
+
+/* Buttons */
+.btn {
+  background: transparent;
+  border: 2px solid #FFD700;
+  color: #FFD700;
+  font-family: inherit;
+  font-size: 0.7rem;
+  padding: 10px 20px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+
+.btn:hover {
+  background: #FFD700;
+  color: #000;
+  box-shadow: 0 0 15px #FFD700;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* Instructions */
+#instructions {
+  width: 100%;
+  text-align: center;
+  font-size: 0.5rem;
+  color: #888;
+  letter-spacing: 1px;
+  line-height: 1.8;
+  margin-top: 5px;
+}
+
+/* Level indicator */
+#level-display {
+  color: #fff;
+  font-size: 0.6rem;
+  text-align: center;
+}
+
+#level-display span {
+  color: #FFD700;
+}
+
+/* Animations */
+@keyframes pulse {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0.7; transform: scale(1.05); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.blink {
+  animation: blink 0.5s infinite;
+}
+
+/* Responsive scaling */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+  }
+
+  #score-label,
+  #high-score-label,
+  #lives-label {
+    font-size: 0.45rem;
+  }
+
+  #score,
+  #high-score {
+    font-size: 0.65rem;
+  }
+
+  .overlay h2 {
+    font-size: 1.2rem;
+  }
+
+  .btn {
+    font-size: 0.6rem;
+    padding: 8px 16px;
+  }
+
+  #instructions {
+    font-size: 0.42rem;
+  }
+}
+
+@media (max-height: 600px) {
+  h1 {
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+
+  #game-container {
+    gap: 5px;
+  }
+}
