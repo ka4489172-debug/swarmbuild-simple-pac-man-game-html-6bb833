@@ -26,6 +26,11 @@ const DIR = {
 const FRIGHTENED_DURATION = 7000; // ms
 const GHOST_EATEN_SCORES  = [200, 400, 800, 1600];
 
+// READY! flash shown at game start / after life lost
+const READY_DURATION = 2000; // ms
+let readyTimer = 0;
+let showReady  = false;
+
 // ─── Maze Layout ──────────────────────────────────────────────────────────────
 // 28 columns × 31 rows  (classic Pac-Man proportions)
 // 1=wall 2=dot 3=pellet 4=door 0=empty
@@ -142,6 +147,9 @@ function initGame() {
     mouthDir: 1,
     moving: false,
   };
+
+  showReady = true;
+  readyTimer = 0;
 
   ghosts = GHOST_NAMES.map((name, i) => ({
     name,
@@ -498,6 +506,9 @@ function resetPositions() {
     g.released = i === 0;
     g.releaseTimer = i * 2000;
   });
+
+  showReady = true;
+  readyTimer = 0;
 }
 
 // ─── Frightened Timer ─────────────────────────────────────────────────────────
@@ -544,16 +555,35 @@ function gameLoop(ts) {
   lastTime = ts;
 
   if (!gamePaused) {
-    movePacman(dt);
-    animateMouth(dt);
-    moveGhosts(dt);
-    updateFrightened(dt);
-    checkCollisions();
+    // READY! countdown — freeze movement during flash
+    if (showReady) {
+      readyTimer += dt;
+      if (readyTimer >= READY_DURATION) showReady = false;
+    }
+
+    if (!showReady) {
+      movePacman(dt);
+      animateMouth(dt);
+    }
+    if (!showReady) {
+      moveGhosts(dt);
+      updateFrightened(dt);
+      checkCollisions();
+    }
 
     // Draw
     drawMaze();
     drawPacman();
     ghosts.forEach(drawGhost);
+
+    // READY! flash overlay
+    if (showReady) {
+      ctx.fillStyle = '#FFD700';
+      ctx.font = 'bold 14px "Press Start 2P", monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('READY!', CANVAS_W / 2, CANVAS_H / 2);
+      ctx.textAlign = 'left';
+    }
   } else {
     // Draw paused state
     drawMaze();
