@@ -1,0 +1,9 @@
+{
+  "name": "pacman-game",
+  "version": "1.0.0",
+  "description": "Simple Pac-Man game in HTML/CSS/JS",
+  "scripts": {
+    "test": "node tests/game.test.js"
+  },
+  "devDependencies": {}
+}
